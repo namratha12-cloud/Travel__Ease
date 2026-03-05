@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Search Bus</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body class="search">
+
+<header class="header">
+    <h1>🔍 Search Buses</h1>
+</header>
+
+<section class="page-card">
+
+    <form onsubmit="searchBuses(); return false;">
+        <input type="text" id="from" placeholder="From City" required>
+        <input type="text" id="to" placeholder="To City" required>
+        <input type="date" id="date" required>
+        <button type="submit">Search Bus</button>
+    </form>
+
+    <table id="resultTable" style="display:none;">
+        <thead>
+            <tr>
+                <th>Bus ID</th>
+                <th>Source</th>
+                <th>Destination</th>
+                <th>Time</th>
+            </tr>
+        </thead>
+        <tbody id="results"></tbody>
+    </table>
+
+</section>
+
+<a class="back" href="index.html">⬅ Back to Home</a>
+
+<script>
+async function searchBuses() {
+    const from = document.getElementById("from").value;
+    const to = document.getElementById("to").value;
+    const date = document.getElementById("date").value;
+
+    const res = await fetch(
+        `http://localhost:7000/search-bus?from=${from}&to=${to}&date=${date}`
+    );
+
+    if (!res.ok) {
+        alert("Search failed");
+        return;
+    }
+
+    const buses = await res.json();
+    const tbody = document.getElementById("results");
+    tbody.innerHTML = "";
+
+    if (buses.length === 0) {
+        tbody.innerHTML = `<tr><td colspan="4">No buses found</td></tr>`;
+    } else {
+        buses.forEach(bus => {
+            tbody.innerHTML += `
+                <tr>
+                    <td>${bus.busId}</td>
+                    <td>${bus.source}</td>
+<td>${bus.destination}</td>
+
+                    <td>${bus.departure}</td>
+                </tr>
+            `;
+        });
+    }
+
+    document.getElementById("resultTable").style.display = "table";
+}
+</script>
+
+</body>
+</html>  
