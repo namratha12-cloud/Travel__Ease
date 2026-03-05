@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Book Ticket</title>
+    <link rel="stylesheet" href="style.css">
+
+<style>
+.time-wrapper {
+    position: relative;
+    width: 100%;
+}
+
+.time-wrapper input {
+    width: 100%;
+    height: 48px;
+    padding: 0 44px 0 16px;
+    border-radius: 12px;
+    border: none;
+    font-size: 16px;
+    box-sizing: border-box;
+}
+
+/* ▼ dropdown arrow */
+.dropdown-icon {
+    position: absolute;
+    right: 16px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 18px;
+    font-weight: bold;
+    pointer-events: none;
+}
+/* ✅ Make select look exactly like input */
+select {
+    width: 100%;
+    height: 48px;
+    padding: 0 16px;
+    border-radius: 12px;
+    border: none;
+    font-size: 16px;
+    box-sizing: border-box;
+    background-color: #fff;
+    color: #888;
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+}
+
+/* ✅ Change color after selecting agency */
+select:valid {
+    color: #000;
+}
+
+
+
+</style>
+</head>
+
+<body class="book">
+
+<header class="header">
+    <h1>🎟 Book Ticket</h1>
+    <p>Enter booking details carefully</p>
+</header>
+
+<section class="page-card">
+
+<form onsubmit="bookTicket(); return false;" autocomplete="off">
+
+    <input type="number" id="pid" placeholder="Passenger ID" autocomplete="off" required>
+
+    <!-- ✅ ONLY CHANGE: AGENCY DROPDOWN -->
+    <select id="aid" autocomplete="off" required>
+        <option value="" disabled selected>Select Agency ID</option>
+        <option value="101">101</option>
+        <option value="102">102</option>
+        <option value="103">103</option>
+    </select>
+
+    <!-- ✅ BUS ID DROPDOWN (201–312) -->
+    <select id="bid" autocomplete="off" required>
+        <option value="" disabled selected hidden>Select Bus ID</option>
+        <!-- 201–250 -->
+        <option value="201">201</option><option value="202">202</option>
+        <option value="203">203</option><option value="204">204</option>
+        <option value="205">205</option><option value="206">206</option>
+        <option value="207">207</option><option value="208">208</option>
+        <option value="209">209</option><option value="210">210</option>
+        <option value="211">211</option><option value="212">212</option>
+        <option value="213">213</option><option value="214">214</option>
+        <option value="215">215</option><option value="216">216</option>
+        <option value="217">217</option><option value="218">218</option>
+        <option value="219">219</option><option value="220">220</option>
+        <option value="221">221</option><option value="222">222</option>
+        <option value="223">223</option><option value="224">224</option>
+        <option value="225">225</option><option value="226">226</option>
+        <option value="227">227</option><option value="228">228</option>
+        <option value="229">229</option><option value="230">230</option>
+        <option value="231">231</option><option value="232">232</option>
+        <option value="233">233</option><option value="234">234</option>
+        <option value="235">235</option><option value="236">236</option>
+        <option value="237">237</option><option value="238">238</option>
+        <option value="239">239</option><option value="240">240</option>
+        <option value="241">241</option><option value="242">242</option>
+        <option value="243">243</option><option value="244">244</option>
+        <option value="245">245</option><option value="246">246</option>
+        <option value="247">247</option><option value="248">248</option>
+        <option value="249">249</option><option value="250">250</option>
+
+        <!-- 251–312 -->
+        <option value="251">251</option><option value="252">252</option>
+        <option value="253">253</option><option value="254">254</option>
+        <option value="255">255</option><option value="256">256</option>
+        <option value="257">257</option><option value="258">258</option>
+        <option value="259">259</option><option value="260">260</option>
+        <option value="261">261</option><option value="262">262</option>
+        <option value="263">263</option><option value="264">264</option>
+        <option value="265">265</option><option value="266">266</option>
+        <option value="267">267</option><option value="268">268</option>
+        <option value="269">269</option><option value="270">270</option>
+        <option value="271">271</option><option value="272">272</option>
+        <option value="273">273</option><option value="274">274</option>
+        <option value="275">275</option><option value="276">276</option>
+        <option value="277">277</option><option value="278">278</option>
+        <option value="279">279</option><option value="280">280</option>
+        <option value="281">281</option><option value="282">282</option>
+        <option value="283">283</option><option value="284">284</option>
+        <option value="285">285</option><option value="286">286</option>
+        <option value="287">287</option><option value="288">288</option>
+        <option value="289">289</option><option value="290">290</option>
+        <option value="291">291</option><option value="292">292</option>
+        <option value="293">293</option><option value="294">294</option>
+        <option value="295">295</option><option value="296">296</option>
+        <option value="297">297</option><option value="298">298</option>
+        <option value="299">299</option><option value="300">300</option>
+        <option value="301">301</option><option value="302">302</option>
+        <option value="303">303</option><option value="304">304</option>
+        <option value="305">305</option><option value="306">306</option>
+        <option value="307">307</option><option value="308">308</option>
+        <option value="309">309</option><option value="310">310</option>
+        <option value="311">311</option><option value="312">312</option>
+    </select>
+
+
+    <input type="date" id="bdate" autocomplete="off" required>
+
+    <!-- ✅ TIME INPUT -->
+    <div class="time-wrapper">
+        <input
+            type="text"
+            id="btime"
+            name="bus-time"
+            placeholder="HH:MM"
+            list="timeList"
+            autocomplete="off"
+            pattern="^([01]\d|2[0-3]):[0-5]\d$"
+            required
+        >
+        <span class="dropdown-icon">▼</span>
+    </div>
+
+    <datalist id="timeList">
+        <option value="06:00">
+        <option value="09:00">
+        <option value="12:00">
+        <option value="15:00">
+    </datalist>
+
+    <button type="submit">Confirm Booking</button>
+</form>
+
+</section>
+
+<a class="back" href="index.html">⬅ Back to Home</a>
+
+<script>
+async function bookTicket() {
+
+    const bookingData = {
+        p_id: Number(document.getElementById("pid").value),
+        a_id: Number(document.getElementById("aid").value),
+        b_id: Number(document.getElementById("bid").value),
+        date: document.getElementById("bdate").value,
+        time: document.getElementById("btime").value
+    };
+
+    try {
+        const res = await fetch("http://localhost:7000/book", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(bookingData)
+        });
+
+        const result = await res.json();
+
+        if (!res.ok && result.suggestions) {
+            let popupMsg =
+                "❌ Bus not available for selected date & time\n\n" +
+                "Available Buses:\n";
+
+            result.suggestions.forEach(bus => {
+                popupMsg +=
+                    `Bus ID: ${bus.b_id} | Date: ${bookingData.date} | Time: ${bus.b_time.substring(0,5)}\n`;
+            });
+
+            alert(popupMsg);
+            return;
+        }
+
+        if (!res.ok) {
+            alert(result.error);
+            return;
+        }
+
+        alert(result.message);
+
+    } catch (err) {
+        alert("❌ Error: " + err.message);
+    }
+}
+</script>
+
+</body>
+</html>
